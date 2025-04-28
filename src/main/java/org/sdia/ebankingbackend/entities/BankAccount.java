@@ -9,7 +9,7 @@ import org.sdia.ebankingbackend.enums.AccountStatus;
 
 import java.util.Date;
 import java.util.List;
-
+@Transactional
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE",length = 4 )

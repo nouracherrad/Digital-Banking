@@ -1,16 +1,20 @@
 package org.sdia.ebankingbackend.services;
 
+import jakarta.transaction.Transactional;
 import org.sdia.ebankingbackend.entities.BankAccount;
 import org.sdia.ebankingbackend.entities.CurrentAccount;
 import org.sdia.ebankingbackend.entities.savingAccount;
 import org.sdia.ebankingbackend.repositories.BankAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+@Transactional
 @Service
 public class BanService {
+    @Autowired
     public BankAccountRepository bankAccountRepository;
+
     public void Consulter(){
-        BankAccount bankAccount = bankAccountRepository.findById("4cde4001-5625-4186-867a-f3e38fb1a2d6").orElse(null);
+        BankAccount bankAccount = bankAccountRepository.findById("13e56d53-6551-4942-b6b8-f6acb2dabc11").orElse(null);
         if (bankAccount != null) {
             System.out.println("************");
             System.out.println(bankAccount.getCustomer().getName());
