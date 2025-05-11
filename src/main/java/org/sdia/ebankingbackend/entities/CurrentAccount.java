@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class CurrentAccount extends BankAccount {
     private double overDraft;
 
-
 }
