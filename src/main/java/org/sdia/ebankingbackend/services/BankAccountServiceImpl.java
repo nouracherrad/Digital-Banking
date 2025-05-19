@@ -193,4 +193,10 @@ return bankAccountsDTO;
         return accountHistoryDTO;
     }
 
+    @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customers = customerRepository.searchCustomer(keyword);
+        List<CustomerDTO> customersDTO = customers.stream().map(customer -> dtolMapper.fromCustomer(customer)).collect(Collectors.toList());
+        return customersDTO; }
+
 }

@@ -6,12 +6,11 @@ import org.sdia.ebankingbackend.dtos.AccountOperationDTO;
 import org.sdia.ebankingbackend.dtos.BankAccountDTO;
 import org.sdia.ebankingbackend.exceptions.BankAccountNotFoundException;
 import org.sdia.ebankingbackend.services.BankAccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@RestController
+@CrossOrigin("*")
 
 public class BankAccountRestApi {
     private BankAccountService bankAccountService;
