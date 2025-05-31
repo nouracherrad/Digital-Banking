@@ -224,24 +224,7 @@ spring.jpa.hibernate.ddl-auto=validate
 
 ---
 
-## Cette version technique inclut :
-
-1. Une explication approfondie de l'architecture
-2. Des extraits de code commentés
-3. Les décisions techniques clés
-4. Le schéma de base de données
-5. Des guides pratiques pour les développeurs
-6. Des considérations de déploiement
-7. Un guide de dépannage
-
-**Elle conviendra mieux à :**
-
-* Une documentation technique interne
-* Un passage de relai entre développeurs
-* Une revue de code approfondie
 
 ```
 
----
 
-```
