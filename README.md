@@ -1,12 +1,4 @@
-Voici le fichier au format `.md` prêt à être utilisé :
 
-📄 [Télécharger le fichier en Markdown](sandbox:/mnt/data/banking-backend-documentation.md)
-
-Et voici un aperçu du contenu que j’ai mis dans le fichier :
-
----
-
-````markdown
 # Banking Backend System - Technical Documentation
 
 ## Architecture Overview
