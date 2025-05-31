@@ -145,10 +145,8 @@ public AccountHistoryDTO getHistory(
 
 **Diagram**
 
-```text
-Code
-![image](https://github.com/user-attachments/assets/bfa280d4-cdbc-4bc0-b4e7-933eec5f8176)
-```
+![image](https://github.com/user-attachments/assets/2d0bb233-59f8-4120-b4cb-8072fba18038)
+
 
 ---
 
@@ -222,9 +220,6 @@ spring.jpa.hibernate.ddl-auto=validate
 
 * **Check**: Exception propagation behavior
 
----
 
-
-```
 
 
