@@ -1,50 +1,71 @@
+Voici le fichier au format `.md` prêt à être utilisé :
+
+📄 [Télécharger le fichier en Markdown](sandbox:/mnt/data/banking-backend-documentation.md)
+
+Et voici un aperçu du contenu que j’ai mis dans le fichier :
+
+---
+
+````markdown
 # Banking Backend System - Technical Documentation
 
 ## Architecture Overview
-Three-layer architecture:
-1. **Presentation Layer**: REST Controllers (`web` package)
-2. **Business Layer**: Services (`services` package)
+
+**Three-layer architecture:**
+
+1. **Presentation Layer**: REST Controllers (`web` package)  
+2. **Business Layer**: Services (`services` package)  
 3. **Data Access Layer**: Repositories + JPA Entities
+
+---
 
 ## Core Components Explanation
 
 ### Domain Model
+
 ```java
 @Entity
 public abstract class BankAccount {
     @Id private String id;
     private double balance;
+    
     @ManyToOne private Customer customer;
+    
     @OneToMany(mappedBy="bankAccount") 
     private List<AccountOperation> operations;
 }
+````
 
-Base class for account inheritance (SINGLE_TABLE strategy)
+* Base class for account inheritance (**SINGLE\_TABLE** strategy)
+* **Relationships**:
 
-Relationships:
+  * `ManyToOne` with `Customer`
+  * `OneToMany` with `AccountOperation`
 
-ManyToOne with Customer
+---
 
-OneToMany with Operations
+### DTO Design Pattern
 
-DTO Design Pattern
-java
+```java
 @Data
 public class CustomerDTO {
     private Long id;
     private String name;
     private String email;
 }
-Used for:
+```
 
-Decoupling API from domain model
+**Used for:**
 
-Preventing lazy loading issues
+* Decoupling API from domain model
+* Preventing lazy loading issues
+* Custom data representation
 
-Custom data representation
+---
 
-Security Implementation
-java
+### Security Implementation
+
+```java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -56,15 +77,19 @@ public class SecurityConfig {
         return http.build();
     }
 }
-JWT-based stateless authentication
+```
 
-OAuth2 resource server configuration
+* JWT-based stateless authentication
+* OAuth2 resource server configuration
+* Role-based authorization with `@PreAuthorize`
 
-Role-based authorization with @PreAuthorize
+---
 
-Key Technical Decisions
-Transaction Management
-java
+## Key Technical Decisions
+
+### Transaction Management
+
+```java
 @Transactional
 @Service
 public class BankAccountServiceImpl {
@@ -73,21 +98,26 @@ public class BankAccountServiceImpl {
         credit(targetId, amount);
     }
 }
-@Transactional ensures ACID properties for money transfers
+```
 
-Spring's declarative transaction management
+* `@Transactional` ensures **ACID** properties
+* Spring's declarative transaction management
 
-Exception Handling
-Custom exceptions hierarchy:
+---
 
-BankAccountNotFoundException
+### Exception Handling
 
-BalanceNotEnoughException
+**Custom exceptions hierarchy:**
 
-CustomerNotFoundException
+* `BankAccountNotFoundException`
+* `BalanceNotEnoughException`
+* `CustomerNotFoundException`
 
-API Pagination
-java
+---
+
+### API Pagination
+
+```java
 @GetMapping("/accounts/{id}/pageoperations")
 public AccountHistoryDTO getHistory(
     @PathVariable String id,
@@ -99,90 +129,111 @@ public AccountHistoryDTO getHistory(
     
     return mapToDTO(pageOps);
 }
-Spring Data pagination
+```
 
-DTO contains:
+* Spring Data pagination
+* DTO contains:
 
-Current page
+  * Current page
+  * Total pages
+  * Page content
 
-Total pages
+---
 
-Page content
+## Database Schema
 
-Database Schema
-Tables Structure
-bank_account (with TYPE discriminator)
+### Tables Structure
 
-customer
+* `bank_account` (with `TYPE` discriminator)
+* `customer`
+* `account_operation`
+* JWT token storage (in-memory)
 
-account_operation
+### Entity Relationships
 
-JWT token storage (in-memory)
+**Diagram**
 
-Entity Relationships
-Diagram
+```text
 Code
 ![image](https://github.com/user-attachments/assets/bfa280d4-cdbc-4bc0-b4e7-933eec5f8176)
+```
 
+---
 
+## Development Guide
 
+### Building the Project
 
-
-Development Guide
-Building the Project
-bash
+```bash
 mvn clean package -DskipTests
-Testing Strategy
-Unit Tests:
+```
 
-Service layer mocking
+---
 
-Controller tests with @WebMvcTest
+### Testing Strategy
 
-Integration Tests:
+* **Unit Tests**:
 
-@DataJpaTest for repositories
+  * Service layer mocking
+  * Controller tests with `@WebMvcTest`
+* **Integration Tests**:
 
-@SpringBootTest for full context
+  * `@DataJpaTest` for repositories
+  * `@SpringBootTest` for full context
 
-Code Style
-Lombok for boilerplate reduction
+---
 
-Google Java Format
+## Code Style
 
-4 spaces indentation
+* Lombok for boilerplate reduction
+* Google Java Format
+* 4 spaces indentation
 
-Deployment Considerations
-Configuration
+---
+
+## Deployment Considerations
+
+### Configuration
+
 Environment-specific properties:
 
-properties
+```properties
 # application-prod.properties
 spring.datasource.url=${DB_URL}
 spring.jpa.hibernate.ddl-auto=validate
-Monitoring
-Recommended endpoints:
+```
 
-/actuator/health
+---
 
-/actuator/metrics
+### Monitoring
 
-Troubleshooting Guide
-Common Issues
-LazyInitializationException:
+**Recommended endpoints:**
 
-Solution: Use DTOs instead of entities in responses
+* `/actuator/health`
+* `/actuator/metrics`
 
-JWT Validation Failures:
+---
 
-Verify: Secret key matching, token expiration
+## Troubleshooting Guide
 
-Transaction Rollbacks:
+### Common Issues
 
-Check: Exception propagation behavior
+**LazyInitializationException**
 
+* **Solution**: Use DTOs instead of entities in responses
 
-Cette version technique inclut :
+**JWT Validation Failures**
+
+* **Verify**: Secret key matching, token expiration
+
+**Transaction Rollbacks**
+
+* **Check**: Exception propagation behavior
+
+---
+
+## Cette version technique inclut :
+
 1. Une explication approfondie de l'architecture
 2. Des extraits de code commentés
 3. Les décisions techniques clés
@@ -191,7 +242,14 @@ Cette version technique inclut :
 6. Des considérations de déploiement
 7. Un guide de dépannage
 
-Elle conviendra mieux à :
-- Une documentation technique interne
-- Un passage de reloi entre développeurs
-- Une revue de code approfondie
+**Elle conviendra mieux à :**
+
+* Une documentation technique interne
+* Un passage de relai entre développeurs
+* Une revue de code approfondie
+
+```
+
+---
+
+```
